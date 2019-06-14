@@ -1,0 +1,90 @@
+1>Angular 1 has 70+ directives like ng-if, ng-model etc., whereas Angular has very less number of 
+directives as we use [ ] and ( ) for bindings in HTML elements.
+
+2>Component-based
+
+Angular follows component based programming which is the future of web development.
+Each component we create is isolated from every other part of our application. 
+This kind of programming allows us to use components written using other frameworks.
+
+Inside a component, we write both business logic and view.
+
+Every Angular application will have one top-level component and several sub components.
+
+3>
+e2e/->This folder contains all End-to-End (e2e) tests of the application written in Jasmine and run by the Protractor
+
+node_modules/->Node.js creates this folder and puts all npm modules installed as listed in package.json
+
+src/->All application related files will be stored inside it
+
+angular.json->Configuration file for Angular CLI where we set several defaults and also configure what files to be included during project build
+
+package.json->This is node configuration file which contains all dependencies required for Angular
+
+tsconfig.json->This is Typescript configuration file where we can configure compiler options
+
+tslint.json->This file contains linting rules preferred by Angular style guide
+
+4>
+Accessing the class property by placing property called title inside {{ }}. 
+This is called interpolation which is one of the data binding mechanism to access 
+class properties inside template
+
+5>A module in Angular is a class with @NgModule decorator added to it. @NgModule metadata 
+will contain the declarations of components, pipes, directives, services which are to be used across the application.
+
+6>Interpolation is one of the form of data binding where we can access component’s data in a template.
+For interpolation, we use double curly braces {{ }}.
+
+7>if we write {{ courseName }},courseName should be the property of the 
+component to which this template is bound to.
+
+8>Angular applications runs  faster than Angular 1.x applications due to its 
+improved change detection mechanism.
+
+9>Angular runs a change detector algorithm on each component from top to bottom in the component tree.
+This change detector algorithm is automatically generated at run time which will check and update the changes at appropriate places in the component tree.
+
+10>Directives are used to change the behavior of components or elements.
+We can use directives in the form of HTML attributes.
+
+11>We create directives using classes attached 
+with @Directive decorator which adds metadata to the class,@Component decorator is actually @Directive with templates
+
+======services=================
+1>The first way to register a service is to specify 
+providedIn property using @injectable decorator.
+
+2>Angular also optimizes the application if registered through 
+providedIn property by removing the service class if none of the components uses it .
+
+3>Services can also be provided across providers property 
+in @Ngmodule decorator of any module
+
+4>There is also a way to limit scope of the service class by registering 
+it inside the providers array inside @Component decorator 
+
+5>Add providers property in the module class so that 
+service class is available to the entire application.
+
+6>If service is needed only for specific component(s), it 
+can be added in those component classes instead of module.
+Add a constructor in a component class with Service class as argument. 
+
+7>Observables, in RxJS, are used to represent asynchronous streams of data. 
+Observables are more advanced version of Promises in JavaScript
+
+====why RxJS=======================
+Why RxJS Observables?
+Angular team has recommended Observables for asynchronous calls because of the following reasons:
+
+Promises emit a single value whereas observables (streams) emit many values
+
+Observables can be cancellable where Promises are not cancellable. If any http response is not required, observables allows us to cancel the subscription whereas promises execute either success or failure callback even if we don’t need the result
+
+Observables support functional operators such as map, filter, reduce etc
+========server communication using http==========
+1>When we make calls to an external server, we want our user to continue to be able to interact with the page. 
+That is, we don’t want our page to freeze until the HTTP request returns from the external server. 
+So, all HTTP requests are asynchronous
