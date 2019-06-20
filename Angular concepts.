@@ -26,8 +26,7 @@ tsconfig.json->This is Typescript configuration file where we can configure comp
 
 tslint.json->This file contains linting rules preferred by Angular style guide
 
-4>
-Accessing the class property by placing property called title inside {{ }}. 
+4>Accessing the class property by placing property called title inside {{ }}. 
 This is called interpolation which is one of the data binding mechanism to access 
 class properties inside template
 
@@ -52,7 +51,79 @@ We can use directives in the form of HTML attributes.
 11>We create directives using classes attached 
 with @Directive decorator which adds metadata to the class,@Component decorator is actually @Directive with templates
 
-======services=================
+12>Directives types--Components,Structural Directives(ngIf,ngFor,ngSwitch),Attribute Directives(ngStyle, ngClass)
+
+13>We use property binding when we want to set the property of a class with the property of an element
+
+14>Attribute binding can be used to bind component property to the attribute directly
+
+15>Attribute binding syntax starts with prefix attr. followed by a dot sign and the name of an attribute.
+
+16>Style binding is used to set inline styles. Syntax starts with prefix style,
+followed by a dot and the name of a CSS style property.Then set the attribute value to an expression
+
+17>Two way binding
+-->It is a mechanism where if model property value changes, it updates the element to which the property 
+is binded to and vice versa. It uses [()] (banana in a box)
+-->Bind name property with text box using ngModel placed in [()] which is representation of two way data binding. 
+Here whatever we type in the textbox at run time will be assigned to property name and when we change name property value, it will be reflected in the textbox
+
+18>Pipes
+-->A pipe can also have optional parameters to change the output. To pass parameters, after a pipe name add a colon( : ) followed by the parameter value.   
+
+===Nested Component====
+-->We are loading root component in index.html page using its selector name, similarly if we want to load one component into another one, 
+   we will load it using its selector name in the template i.e., html page of container component
+-->We can use @Input decorator in the child component on any property type like arrays, objects etc.
+
+-->If a child component wants to send data to its parent component, then it must create a property with @Output decorator
+
+-->The only method for child component to pass data to its parent component is through events.The property must be of type EventEmitter
+
+====component lifecycle=====
+1>A component has a life cycle which is managed by Angular. It includes creating a component, rendering it, 
+creating and rendering its child components, checks when its data bound properties change and destroys it before removing it from the DOM.
+
+2>Angular has some methods/hooks which provides visibility into these key life moments of a component and the ability to act when they occur.
+
+ngOnChanges – It will be invoked when Angular sets data bound input property i.e., property attached with @Input().
+	      This will be invoked whenever input property changes its value
+
+ngOnInit – It will be invoked when Angular initializes the directive or component
+
+ngDoCheck -  It will be invoked for every change detection in the application
+
+ngAfterContentInit – It will be invoked after Angular projects content into its view
+
+ngAfterContentChecked – It will be invoked after Angular checks the bindings of the content it projected into its view
+
+ngAfterViewInit – It will be invoked after Angular creates component’s views
+
+ngAfterViewChecked – It will be invoked after Angular checks the bindings of the component’s views
+
+ngOnDestroy – It will be invoked before Angular destroys directive or component
+
+==>ngOnInit() is the first method to be invoked for AppComponent. Whenever data property value changes it invokes ngDoCheck() method. 
+All Init methods will be invoked only once at the beginning and fromlater on whenever change happens Angular invokes ngDoCheck, 
+ngAfterContentChecked and ngAfterViewChecked methods
+
+===============FORMS in ANGULAR===========================
+-->Template driven Forms - Used to create small to medium sized forms
+   In template driven form, data binding, validation etc., will be written in the template itself.
+
+Model driven Forms or Reactive Forms - Used to create large size forms
+
+======Dependency Injection=============================
+1>Dependency Injection (DI) is a mechanism where the required resources will be injected into the code automatically.
+
+DI allows developers to reuse the code across application.
+
+DI makes the code loosely coupled.
+
+DI makes the application development and testing much easier.
+
+DI allows the developer to ask for the dependencies from Angular. There is no need for the developer to explicitly create/instantiate them.
+======services=========================================
 1>The first way to register a service is to specify 
 providedIn property using @injectable decorator.
 
@@ -75,6 +146,10 @@ Add a constructor in a component class with Service class as argument.
 7>Observables, in RxJS, are used to represent asynchronous streams of data. 
 Observables are more advanced version of Promises in JavaScript
 
+8>Promise is a javascript object which returns data asynchronously.
+
+9>Promise has then() method which will be invoked when promise response is received from service class. 
+then() has success callback function where the response received will be passed to the parameter books which in turn assigns it to the local variable books
 ====why RxJS=======================
 Why RxJS Observables?
 Angular team has recommended Observables for asynchronous calls because of the following reasons:
@@ -88,3 +163,9 @@ Observables support functional operators such as map, filter, reduce etc
 1>When we make calls to an external server, we want our user to continue to be able to interact with the page. 
 That is, we don’t want our page to freeze until the HTTP request returns from the external server. 
 So, all HTTP requests are asynchronous
+===========Route Guards==================
+In Angular application, user can navigate to any url directly. That's not the right thing to do always
+
+-->Angular has canActivate interface which can be used to check if a user is logged in to access a component
+
+-->We need to override canActivate() method in the guard class as shown below
